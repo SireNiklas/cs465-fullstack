@@ -1,0 +1,32 @@
+/* GET travel view */
+const travel = (req, res) => {
+  const trips = [
+    {
+      name: 'Gale Reef',
+      image: 'reef1.jpg',
+      paragraphs: [
+        'Sed et augue lorem. In sit amet placerat arcu. Mauris volutpat ipsum ac justo mollis vel vestibulum orci gravida. Vestibulum sit amet porttitor odio. Nulla facilisi. Fusce at pretium felis.',
+        'Sed consequat libero ut turpis venenatis ut aliquam risus semper. Etiam convallis mi vel risus pretium sodales. Etiam nunc lorem ullamcorper vitae laoreet.'
+      ]
+    },
+    {
+      name: "Dawson's Reef",
+      image: 'reef2.jpg',
+      paragraphs: [
+        'Integer magna leo, posuere et dignissim vitae, porttitor at odio. Pellentesque a metus nec magna placerat volutpat. Nunc nisi mi, elementum sit amet aliquet quis, tristique quis nisl. Curabitur odio lacus, blandit ut hendrerit',
+        'vulputate, vulputate at est. Morbi aliquet viverra metus eu consectetur. In lorem dui, elementum sit amet convallis ac, tincidunt vel sapien.'
+      ]
+    },
+    {
+      name: "Claire's REEF",
+      image: 'reef3.jpg',
+      paragraphs: [
+        'Donec sed felis risus. Nulla facilisi. Donec a orci tellus, et auctor odio. Fusce ac orci nibh, quis semper arcu. Cras orci neque, euismod et accumsan ac, sagittis molestie lorem. Proin odio sapien, elementum at tempor non.',
+        'Vulputate eget libero. In hac habitasse platea dictumst. Integer purus justo, egestas eu consectetur eu, cursus in tortor. Quisque nec nunc ac mi ultrices iaculis.'
+      ]
+    }
+  ];
+  res.render('travel', { title: 'Travel', trips });
+};
+
+module.exports = { travel };

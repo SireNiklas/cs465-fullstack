@@ -1,10 +1,19 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>{{title}}</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    {{{body}}}
-  </body>
+<head>
+  <meta charset="UTF-8">
+  <title>{{title}} - Travlr Getaways</title>
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+<body>
+  <div id="background">
+    <div id="page">
+      {{> header}}
+      <div id="contents">
+        {{{body}}}
+      </div>
+    </div>
+    {{> footer}}
+  </div>
+</body>
 </html>
