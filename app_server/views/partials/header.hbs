@@ -4,13 +4,13 @@
   </div>
   <div id="navigation">
     <ul>
-      <li><a href="/">Home</a></li>
-      <li class="selected"><a href="/travel">Travel</a></li>
-      <li><a href="/rooms.html">Rooms</a></li>
-      <li><a href="/meals.html">Meals</a></li>
-      <li><a href="/news.html">News</a></li>
-      <li><a href="/about.html">About</a></li>
-      <li><a href="/contact.html">Contact</a></li>
+      <li{{#if nav.home}} class="selected"{{/if}}><a href="/">Home</a></li>
+      <li{{#if nav.travel}} class="selected"{{/if}}><a href="/travel">Travel</a></li>
+      <li{{#if nav.rooms}} class="selected"{{/if}}><a href="/rooms">Rooms</a></li>
+      <li{{#if nav.meals}} class="selected"{{/if}}><a href="/meals">Meals</a></li>
+      <li{{#if nav.news}} class="selected"{{/if}}><a href="/news">News</a></li>
+      <li{{#if nav.about}} class="selected"{{/if}}><a href="/about">About</a></li>
+      <li{{#if nav.contact}} class="selected"{{/if}}><a href="/contact">Contact</a></li>
     </ul>
   </div>
 </div>
