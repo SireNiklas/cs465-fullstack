@@ -1,0 +1,42 @@
+[
+  {
+    "code": "GALR210214",
+    "name": "Reef & Beef",
+    "length": "4 nights / 5 days",
+    "start": "2026-02-14T00:00:00Z",
+    "resort": "Emerald Bay Resort, 3 stars",
+    "perPerson": "799.00",
+    "image": "reef1.jpg",
+    "description": "<p>Snorkel coral reefs by day and feast on fresh seafood by night.</p>"
+  },
+  {
+    "code": "TROP250214",
+    "name": "Tropical Adventure",
+    "length": "7 nights / 8 days",
+    "start": "2026-05-21T00:00:00Z",
+    "resort": "Coral Sands, 4 stars",
+    "perPerson": "1199.00",
+    "image": "tropical1.jpg",
+    "description": "<p>Zip-line through rainforest canopy and unwind on white-sand beaches.</p>"
+  },
+  {
+    "code": "MTNX180314",
+    "name": "Mountain Expedition",
+    "length": "5 nights / 6 days",
+    "start": "2026-07-10T00:00:00Z",
+    "resort": "Alpine Ridge Lodge, 4 stars",
+    "perPerson": "1499.00",
+    "image": "mountain1.jpg",
+    "description": "<p>Guided summit hikes, alpine lakes, and lodge dining at altitude.</p>"
+  },
+  {
+    "code": "SAFR120514",
+    "name": "Safari Getaway",
+    "length": "6 nights / 7 days",
+    "start": "2026-09-03T00:00:00Z",
+    "resort": "Savanna Plains Camp, 5 stars",
+    "perPerson": "2299.00",
+    "image": "safari1.jpg",
+    "description": "<p>Dawn game drives, luxury tented camps, and Big Five sightings.</p>"
+  }
+]
