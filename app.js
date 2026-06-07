@@ -15,11 +15,21 @@ var newsRouter = require('./app_server/routes/news');
 var aboutRouter = require('./app_server/routes/about');
 var contactRouter = require('./app_server/routes/contact');
 
+var apiRouter = require('./app_api/routes/index');
+
 var app = express();
 
 app.set('views', path.join(__dirname, 'app_server', 'views'));
 app.set('view engine', 'hbs');
 hbs.registerPartials(path.join(__dirname, 'app_server', 'views', 'partials'));
+
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', 'http://localhost:4200');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+  if (req.method === 'OPTIONS') return res.sendStatus(200);
+  next();
+});
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -36,6 +46,8 @@ app.use('/about', aboutRouter);
 app.use('/contact', contactRouter);
 
 app.use(express.static(path.join(__dirname, 'public'), { index: false }));
+
+app.use('/api', apiRouter);
 
 app.use(function(req, res, next) {
   next(createError(404));

@@ -1,0 +1,60 @@
+<div class="container mt-4">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card shadow-sm">
+        <div class="card-header"><h4 class="mb-0">Add New Trip</h4></div>
+        <div class="card-body">
+          <form [formGroup]="addForm" (ngSubmit)="onSubmit()">
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="form-label">Trip Code</label>
+                <input type="text" class="form-control" formControlName="code"
+                  [ngClass]="{'is-invalid': submitted && f['code'].errors}">
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Name</label>
+                <input type="text" class="form-control" formControlName="name"
+                  [ngClass]="{'is-invalid': submitted && f['name'].errors}">
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Length</label>
+                <input type="text" class="form-control" formControlName="length"
+                  placeholder="e.g. 4 nights / 5 days"
+                  [ngClass]="{'is-invalid': submitted && f['length'].errors}">
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Start Date</label>
+                <input type="date" class="form-control" formControlName="start"
+                  [ngClass]="{'is-invalid': submitted && f['start'].errors}">
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Resort</label>
+                <input type="text" class="form-control" formControlName="resort"
+                  [ngClass]="{'is-invalid': submitted && f['resort'].errors}">
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Per Person ($)</label>
+                <input type="text" class="form-control" formControlName="perPerson"
+                  [ngClass]="{'is-invalid': submitted && f['perPerson'].errors}">
+              </div>
+              <div class="col-12">
+                <label class="form-label">Image URL</label>
+                <input type="text" class="form-control" formControlName="image"
+                  [ngClass]="{'is-invalid': submitted && f['image'].errors}">
+              </div>
+              <div class="col-12">
+                <label class="form-label">Description</label>
+                <textarea class="form-control" formControlName="description" rows="4"
+                  [ngClass]="{'is-invalid': submitted && f['description'].errors}"></textarea>
+              </div>
+            </div>
+            <div class="mt-4 d-flex gap-2">
+              <button type="submit" class="btn btn-primary">Save Trip</button>
+              <a routerLink="/" class="btn btn-outline-secondary">Cancel</a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

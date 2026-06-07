@@ -1,0 +1,16 @@
+<div class="container">
+  <div class="row mb-3">
+    <div class="col"><h2>Trip Administration</h2></div>
+    <div class="col text-end">
+      <a routerLink="/add-trip" class="btn btn-primary">Add Trip</a>
+    </div>
+  </div>
+  <p *ngIf="message" class="alert alert-danger">{{ message }}</p>
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+    <app-trip-card
+      *ngFor="let trip of trips"
+      [trip]="trip"
+      (tripDeleted)="getTrips()">
+    </app-trip-card>
+  </div>
+</div>

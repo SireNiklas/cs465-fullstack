@@ -1,6 +1,7 @@
-const trips = require('../data/trips.json');
+const Trip = require('../../app_api/models/travlr');
 
-const travel = (req, res) => {
+const travel = async (req, res) => {
+  const trips = await Trip.find({}).exec();
   res.render('travel', {
     title: 'Travel',
     nav: { travel: true },
