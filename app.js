@@ -15,6 +15,8 @@ var newsRouter = require('./app_server/routes/news');
 var aboutRouter = require('./app_server/routes/about');
 var contactRouter = require('./app_server/routes/contact');
 
+var apiRouter = require('./app_api/routes/index');
+
 var app = express();
 
 app.set('views', path.join(__dirname, 'app_server', 'views'));
@@ -36,6 +38,8 @@ app.use('/about', aboutRouter);
 app.use('/contact', contactRouter);
 
 app.use(express.static(path.join(__dirname, 'public'), { index: false }));
+
+app.use('/api', apiRouter);
 
 app.use(function(req, res, next) {
   next(createError(404));
