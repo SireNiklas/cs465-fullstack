@@ -1,4 +1,10 @@
 <nav class="navbar navbar-dark bg-dark px-3 mb-4">
   <a class="navbar-brand" routerLink="/">Travlr Admin</a>
+  @if (!auth.isLoggedIn()) {
+    <a routerLink="/login">Login</a>
+  }
+  @if (auth.isLoggedIn()) {
+    <a (click)="onLogout()">Logout {{ auth.getCurrentUser()?.name }}</a>
+  }
 </nav>
 <router-outlet></router-outlet>

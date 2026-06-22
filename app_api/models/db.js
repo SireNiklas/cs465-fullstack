@@ -38,3 +38,5 @@ connect();
 require('./travlr'); // registers the schema on connect
 
 module.exports = mongoose;
+
+require('./user');

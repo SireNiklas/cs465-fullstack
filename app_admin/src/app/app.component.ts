@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { inject, Component } from '@angular/core';
+import { AuthenticationService } from './authentication.service';
 import { RouterOutlet, RouterModule } from '@angular/router';
 
 @Component({
@@ -9,5 +10,8 @@ import { RouterOutlet, RouterModule } from '@angular/router';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  public auth = inject(AuthenticationService);
+  public onLogout(): void { this.auth.logout(); }
+
   title = 'Travlr Getaways Admin';
 }
