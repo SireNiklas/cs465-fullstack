@@ -1,0 +1,21 @@
+<div class="mb-3">
+  <input
+    type="text"
+    class="form-control"
+    [(ngModel)]="searchTerm"
+    [placeholder]="config.searchPlaceholder || 'Search...'" />
+</div>
+
+<p *ngIf="filteredItems.length === 0" class="alert alert-info">
+  {{ config.emptyMessage || 'Nothing to display.' }}
+</p>
+
+<div class="row row-cols-1 row-cols-md-3 g-4">
+  <div class="col" *ngFor="let item of filteredItems">
+    <app-browse-card
+      [item]="item"
+      [config]="config"
+      (action)="onAction($event)">
+    </app-browse-card>
+  </div>
+</div>

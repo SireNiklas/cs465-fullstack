@@ -1,8 +1,9 @@
-const Trip = require('../models/travlr');
+// HTTP only. Anything touching the db goes through TripRepository.
+const tripRepository = require('../repositories/TripRepository');
 
 const tripsList = async (req, res) => {
   try {
-    const trips = await Trip.find({}).exec();
+    const trips = await tripRepository.listTrips();
     if (!trips || trips.length === 0) {
       return res.status(404).json({ message: 'No trips found' });
     }
@@ -14,7 +15,7 @@ const tripsList = async (req, res) => {
 
 const tripsFindByCode = async (req, res) => {
   try {
-    const trips = await Trip.find({ code: req.params.tripCode }).exec();
+    const trips = await tripRepository.findByCode(req.params.tripCode);
     if (!trips || trips.length === 0) {
       return res.status(404).json({ message: 'Trip not found' });
     }
@@ -26,7 +27,7 @@ const tripsFindByCode = async (req, res) => {
 
 const tripsAddTrip = async (req, res) => {
   try {
-    const trip = await Trip.create({
+    const trip = await tripRepository.addTrip({
       code:        req.body.code,
       name:        req.body.name,
       length:      req.body.length,
@@ -44,20 +45,16 @@ const tripsAddTrip = async (req, res) => {
 
 const tripsUpdateTrip = async (req, res) => {
   try {
-    const trip = await Trip.findOneAndUpdate(
-      { code: req.params.tripCode },
-      {
-        code:        req.body.code,
-        name:        req.body.name,
-        length:      req.body.length,
-        start:       req.body.start,
-        resort:      req.body.resort,
-        perPerson:   req.body.perPerson,
-        image:       req.body.image,
-        description: req.body.description,
-      },
-      { new: true }
-    ).exec();
+    const trip = await tripRepository.updateByCode(req.params.tripCode, {
+      code:        req.body.code,
+      name:        req.body.name,
+      length:      req.body.length,
+      start:       req.body.start,
+      resort:      req.body.resort,
+      perPerson:   req.body.perPerson,
+      image:       req.body.image,
+      description: req.body.description,
+    });
     if (!trip) {
       return res.status(404).json({ message: 'Trip not found' });
     }
@@ -69,7 +66,7 @@ const tripsUpdateTrip = async (req, res) => {
 
 const tripsDeleteTrip = async (req, res) => {
   try {
-    const trip = await Trip.findOneAndDelete({ code: req.params.tripCode }).exec();
+    const trip = await tripRepository.deleteByCode(req.params.tripCode);
     if (!trip) {
       return res.status(404).json({ message: 'Trip not found' });
     }
