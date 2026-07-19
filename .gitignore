@@ -68,3 +68,10 @@ setup-*.sh
 finalize-module7.sh
 squash-module7.sh
 tidy-module7.sh
+
+# CS-499 helper scripts and Windows download cruft (not part of the app)
+apply_enhancement.sh
+verify_milestone_two.sh
+*.sh:Zone.Identifier
+*:Zone.Identifier
+*.docx
