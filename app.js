@@ -1,6 +1,7 @@
 require('dotenv').config();
 require('./app_api/models/db');
 const passport = require('passport');
+const cors = require('cors');
 require('./app_api/config/passport');
 var createError = require('http-errors');
 var express = require('express');
@@ -40,6 +41,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
+app.use(cors({ origin: 'http://localhost:4200' }));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/travel', travelRouter);
