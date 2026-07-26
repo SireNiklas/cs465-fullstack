@@ -75,3 +75,4 @@ verify_milestone_two.sh
 *.sh:Zone.Identifier
 *:Zone.Identifier
 *.docx
+tools/synthetic.json
