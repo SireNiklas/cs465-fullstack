@@ -10,7 +10,8 @@
     "test:security": "node --test test/security.test.js",
     "test:all": "node --test app_api/repositories/TripRepository.test.js test/security.test.js test/ranking.test.js",
     "explain": "node tools/explain_indexes.js",
-    "seed:users": "node tools/seed_users.js"
+    "seed:users": "node tools/seed_users.js",
+    "migrate:trips": "node tools/migrate_trips.js"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",

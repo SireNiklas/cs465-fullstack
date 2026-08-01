@@ -22,8 +22,26 @@ a caller cannot supply a pattern that backtracks catastrophically.
 
 ### Compound indexes
 `app_api/models/travlr.js` adds `{ resort: 1, start: 1 }` and
-`{ start: 1, name: 1 }`. Equality field first, then the range or sort field, so
-one index serves both stages of the query.
+`{ name: 1, start: 1 }`.
+
+The second one started as `{ start: 1, name: 1 }` and the planner refused it.
+Running `explain()` showed it walking the single field name index instead. The
+reason is that a range scan on `start` returns rows out of name order, so
+sorting by name afterward would need a blocking sort. Putting the sort field
+first and the range field second lets one index satisfy both stages. The order
+is equality, then sort, then range.
+
+The name search had a second problem that only showed up at size. The whitelist
+built a case insensitive regex, and a case insensitive pattern cannot produce
+index bounds, so a prefix search read every key in the index: 50,000 keys
+examined to return 10 documents. The schema now carries `nameLower`, a
+lowercased copy kept in step by save, insertMany, and findOneAndUpdate hooks.
+The whitelist lowercases the caller's input and matches a case sensitive
+anchored pattern against that field, which restores the bounds without changing
+what the caller experiences.
+
+`npm run migrate:trips` fills in `nameLower` on existing documents and syncs the
+collection indexes to the schema, dropping the ones that are no longer used.
 
 `npm run explain` runs the queries the browse screen sends and prints the
 winning plan, the index chosen, and documents examined. Each case runs a second
@@ -67,6 +85,7 @@ the pipeline converts it with `$toDouble` before any math.
 ```
 npm install
 npm run test:all      # 58 tests, no database needed
+npm run migrate:trips # backfill nameLower and sync indexes, needs MongoDB
 npm run seed:users    # admin, regular, and one deliberately legacy account
 npm run explain       # index scan vs collection scan, needs MongoDB running
 npm start

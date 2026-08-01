@@ -55,19 +55,32 @@ test('a nested operator on a date field is rejected', () => {
   assert.strictEqual(errors.length, 1);
 });
 
-test('name becomes an anchored case insensitive prefix match', () => {
+test('name becomes an anchored prefix match on the lowercased field', () => {
   const { filter } = buildTripQuery({ name: 'Reef' });
-  assert.ok(filter.name instanceof RegExp);
-  assert.strictEqual(filter.name.source, '^Reef');
-  assert.strictEqual(filter.name.flags, 'i');
-  assert.ok(filter.name.test('Reef & Beef'));
-  assert.ok(!filter.name.test('Grand Reef'));
+  assert.ok(filter.nameLower instanceof RegExp);
+  assert.strictEqual(filter.name, undefined);
+  assert.strictEqual(filter.nameLower.source, '^reef');
+  assert.ok(filter.nameLower.test('reef & beef'));
+  assert.ok(!filter.nameLower.test('grand reef'));
+});
+
+test('the prefix regex carries no ignore case flag, which is what keeps the bounds tight', () => {
+  const { filter } = buildTripQuery({ name: 'Reef' });
+  assert.strictEqual(filter.nameLower.flags, '');
+});
+
+test('mixed case input still matches, because the input is lowercased not the pattern', () => {
+  const shouty = buildTripQuery({ name: 'REEF' }).filter.nameLower;
+  const mixed = buildTripQuery({ name: 'ReEf' }).filter.nameLower;
+  assert.strictEqual(shouty.source, '^reef');
+  assert.strictEqual(mixed.source, '^reef');
+  assert.ok(shouty.test('reef & beef'));
 });
 
 test('regex metacharacters in name are escaped instead of interpreted', () => {
   const { filter } = buildTripQuery({ name: '(a+)+$' });
-  assert.strictEqual(filter.name.source, '^\\(a\\+\\)\\+\\$');
-  assert.ok(!filter.name.test('aaaaaaaaaaaaaaaa'));
+  assert.strictEqual(filter.nameLower.source, '^\\(a\\+\\)\\+\\$');
+  assert.ok(!filter.nameLower.test('aaaaaaaaaaaaaaaa'));
 });
 
 test('a sort field outside the allowed set is rejected', () => {

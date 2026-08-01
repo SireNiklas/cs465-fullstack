@@ -33,7 +33,7 @@ const CASES = [
   {
     label: 'date range on start, sorted by name',
     query: { startAfter: '2026-01-01', startBefore: '2026-12-31', sort: 'name' },
-    expect: 'start_1_name_1',
+    expect: 'name_1_start_1',
   },
   {
     label: 'equality on code, the unique index',
@@ -41,9 +41,9 @@ const CASES = [
     expect: 'code_1',
   },
   {
-    label: 'anchored name prefix, served by the single field name index',
+    label: 'anchored name prefix against the lowercased field',
     query: { name: 'Re' },
-    expect: 'name_1',
+    expect: 'nameLower_1',
   },
 ];
 
@@ -111,6 +111,7 @@ function generateTrips(offset, count) {
     docs.push({
       code: `SYN${String(i).padStart(8, '0')}`,
       name: `Trip ${String(i).padStart(7, '0')}`,
+      nameLower: `trip ${String(i).padStart(7, '0')}`,
       length: '5 nights / 6 days',
       start: new Date(base + (i % 900) * day),
       resort: RESORTS[i % RESORTS.length],
@@ -133,9 +134,9 @@ async function buildSample(db, count) {
     await collection.insertMany(generateTrips(start, size), { ordered: false });
   }
   await collection.createIndex({ code: 1 }, { unique: true, name: 'code_1' });
-  await collection.createIndex({ name: 1 }, { name: 'name_1' });
+  await collection.createIndex({ nameLower: 1 }, { name: 'nameLower_1' });
   await collection.createIndex({ resort: 1, start: 1 }, { name: 'resort_1_start_1' });
-  await collection.createIndex({ start: 1, name: 1 }, { name: 'start_1_name_1' });
+  await collection.createIndex({ name: 1, start: 1 }, { name: 'name_1_start_1' });
   return collection;
 }
 

@@ -34,8 +34,11 @@ function buildTripQuery(rawQuery = {}) {
       filter.resort = value;
     },
     name(value) {
-      // prefix match, anchored, metacharacters neutralized
-      filter.name = new RegExp('^' + escapeRegex(value), 'i');
+      // Anchored prefix against the lowercased copy of the name. No 'i' flag:
+      // a case insensitive regex cannot produce index bounds, so it would read
+      // every key in the index. Lowercasing the input instead keeps the search
+      // case insensitive and keeps the bounds tight.
+      filter.nameLower = new RegExp('^' + escapeRegex(value.toLowerCase()));
     },
     startAfter(value) {
       const date = new Date(value);
