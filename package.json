@@ -4,9 +4,13 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "test": "node --test app_api/repositories/TripRepository.test.js",
+    "test": "node --test app_api/repositories/TripRepository.test.js test/security.test.js",
     "test:ranking": "node --test test/ranking.test.js",
-    "bench": "node tools/benchmark.js"
+    "bench": "node tools/benchmark.js",
+    "test:security": "node --test test/security.test.js",
+    "test:all": "node --test app_api/repositories/TripRepository.test.js test/security.test.js test/ranking.test.js",
+    "explain": "node tools/explain_indexes.js",
+    "seed:users": "node tools/seed_users.js"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
@@ -18,7 +22,7 @@
     "hbs": "~4.0.4",
     "http-errors": "~1.6.3",
     "jsonwebtoken": "^9.0.3",
-    "mongoose": "^8.24.0",
+    "mongoose": "^8.24.2",
     "morgan": "~1.9.1",
     "passport": "^0.7.0",
     "passport-local": "^1.0.0"

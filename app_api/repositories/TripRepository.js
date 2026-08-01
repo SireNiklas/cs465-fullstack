@@ -17,6 +17,15 @@ class TripRepository extends BaseRepository {
     return this.findAll({ code });
   }
 
+  // filter and options come from the whitelist, never straight off req.query
+  searchTrips(filter = {}, options = {}) {
+    return this.findMany(filter, options);
+  }
+
+  countMatching(filter = {}) {
+    return this.model.countDocuments(filter).exec();
+  }
+
   addTrip(data) {
     return this.create(data);
   }
@@ -27,6 +36,36 @@ class TripRepository extends BaseRepository {
 
   deleteByCode(code) {
     return this.remove({ code });
+  }
+
+  // perPerson is stored as a string like "799.00", so it gets converted inside
+  // the pipeline before any math happens
+  statsByResort() {
+    return this.aggregate([
+      { $addFields: { priceValue: { $toDouble: '$perPerson' } } },
+      {
+        $group: {
+          _id: '$resort',
+          tripCount: { $sum: 1 },
+          averagePerPerson: { $avg: '$priceValue' },
+          lowestPerPerson: { $min: '$priceValue' },
+          highestPerPerson: { $max: '$priceValue' },
+          earliestStart: { $min: '$start' },
+        },
+      },
+      {
+        $project: {
+          _id: 0,
+          resort: '$_id',
+          tripCount: 1,
+          averagePerPerson: { $round: ['$averagePerPerson', 2] },
+          lowestPerPerson: 1,
+          highestPerPerson: 1,
+          earliestStart: 1,
+        },
+      },
+      { $sort: { tripCount: -1, resort: 1 } },
+    ]);
   }
 }
 

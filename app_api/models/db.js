@@ -36,6 +36,7 @@ process.on('SIGTERM', () => {
 connect();
 
 require('./travlr'); // registers the schema on connect
+require('./favorite');
 
 module.exports = mongoose;
 

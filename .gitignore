@@ -76,3 +76,5 @@ verify_milestone_two.sh
 *:Zone.Identifier
 *.docx
 tools/synthetic.json
+apply_enhancement_three.sh
+verify_milestone_four.sh
