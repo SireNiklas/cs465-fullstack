@@ -26,8 +26,11 @@ a caller cannot supply a pattern that backtracks catastrophically.
 one index serves both stages of the query.
 
 `npm run explain` runs the queries the browse screen sends and prints the
-winning plan, documents examined, and whether the result came from an index
-scan or a collection scan.
+winning plan, the index chosen, and documents examined. Each case runs a second
+time forced onto a collection scan with a `$natural` hint, so the indexed and
+unindexed numbers sit next to each other. The seed set is only a handful of
+trips, so `node tools/explain_indexes.js --scale 50000` builds a throwaway
+collection, indexes it the same way, measures against that, and drops it.
 
 ### Favorites with owner scoped access
 `app_api/models/favorite.js` holds one document per user per trip, with a unique
