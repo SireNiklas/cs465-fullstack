@@ -55,23 +55,40 @@ app.use(express.static(path.join(__dirname, 'public'), { index: false }));
 
 app.use('/api', apiRouter);
 
-app.use(function(req, res, next) {
+// An unmatched API path answers in JSON. Falling through to the HTML 404 below
+// hands a browser page to a client that asked for data.
+app.use('/api', function (req, res) {
+  res.status(404).json({ message: 'Not found.' });
+});
+
+app.use(function (req, res, next) {
   next(createError(404));
 });
 
-app.use(function(err, req, res, next) {
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
-  res.status(err.status || 500);
-  res.render('error');
-});
+// One error handler, and it never sends a stack trace to a client.
+//
+// The original file had two: a renderer that put err.stack into the page
+// whenever NODE_ENV was not production, followed by a handler meant to turn JWT
+// failures into JSON. Express runs error handlers in registration order and the
+// renderer never called next(), so the JSON handler was unreachable. Every
+// unauthenticated API request came back as an HTML page containing absolute
+// filesystem paths and the dependency tree. Order was the whole bug.
+app.use(function (err, req, res, next) {
+  const status = err.status || (err.name === 'UnauthorizedError' ? 401 : 500);
 
-app.use((err, req, res, next) => {
-  if (err.name === 'UnauthorizedError') {
-    res.status(401).json({ message: err.message });
-  } else {
-    next(err);
+  // the operator gets the detail, the client does not
+  if (status >= 500) console.error(err);
+
+  if (req.originalUrl.startsWith('/api')) {
+    return res.status(status).json({
+      message: status >= 500 ? 'Internal server error.' : err.message,
+    });
   }
+
+  res.status(status);
+  res.locals.message = status >= 500 ? 'Something went wrong.' : err.message;
+  res.locals.error = {};
+  res.render('error');
 });
 
 module.exports = app;

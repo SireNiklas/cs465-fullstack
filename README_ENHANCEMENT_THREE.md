@@ -75,6 +75,24 @@ count is stored on each user record and verification uses the stored value, so
 old hashes keep working. Login is the only moment the plaintext exists, so the
 local strategy rehashes at the current count right after a successful check.
 
+### Error responses that leak nothing
+Found by reading the server log during live testing. An unauthenticated request
+to any protected API route came back as a 2,938 byte HTML page containing a full
+Node stack trace: absolute filesystem paths, project layout, dependency
+internals.
+
+The cause was handler order. `app.js` registered a generic renderer that put
+`err.stack` into the page whenever `NODE_ENV` was not `production`, and after it
+a handler meant to turn JWT failures into JSON. Express runs error handlers in
+registration order and the renderer never called `next()`, so the JSON handler
+had never executed once.
+
+There is now one error handler. It answers JSON for anything under `/api`,
+renders the HTML page for the public site, logs 5xx detail to the server
+console, and never puts a stack or an internal message in a response.
+`error.hbs` no longer contains a `<pre>` block at all. The same request is now
+46 bytes.
+
 ### Aggregation pipeline
 `GET /api/trips/stats` groups trips by resort and returns count, average, lowest
 and highest price, and earliest departure. `perPerson` is stored as a string, so
@@ -113,3 +131,6 @@ Log in as the legacy account once and the record moves to 210,000 iterations.
 | GET | `/api/favorites` | authenticated, own rows only |
 | POST | `/api/favorites` | authenticated, own rows only |
 | DELETE | `/api/favorites/:tripCode` | authenticated, own rows only |
+
+Any unmatched path under `/api` answers 404 in JSON instead of falling through
+to the HTML 404 page.
