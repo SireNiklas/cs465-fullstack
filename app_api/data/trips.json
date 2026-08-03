@@ -7,7 +7,7 @@
     "resort": "Emerald Bay Resort, 3 stars",
     "perPerson": "799.00",
     "image": "reef1.jpg",
-    "description": "<p>Snorkel coral reefs by day and feast on fresh seafood by night.</p>"
+    "description": "Snorkel coral reefs by day and feast on fresh seafood by night."
   },
   {
     "code": "TROP250214",
@@ -17,7 +17,7 @@
     "resort": "Coral Sands, 4 stars",
     "perPerson": "1199.00",
     "image": "tropical1.jpg",
-    "description": "<p>Zip-line through rainforest canopy and unwind on white-sand beaches.</p>"
+    "description": "Zip-line through rainforest canopy and unwind on white-sand beaches."
   },
   {
     "code": "MTNX180314",
@@ -27,7 +27,7 @@
     "resort": "Alpine Ridge Lodge, 4 stars",
     "perPerson": "1499.00",
     "image": "mountain1.jpg",
-    "description": "<p>Guided summit hikes, alpine lakes, and lodge dining at altitude.</p>"
+    "description": "Guided summit hikes, alpine lakes, and lodge dining at altitude."
   },
   {
     "code": "SAFR120514",
@@ -37,6 +37,6 @@
     "resort": "Savanna Plains Camp, 5 stars",
     "perPerson": "2299.00",
     "image": "safari1.jpg",
-    "description": "<p>Dawn game drives, luxury tented camps, and Big Five sightings.</p>"
+    "description": "Dawn game drives, luxury tented camps, and Big Five sightings."
   }
 ]
