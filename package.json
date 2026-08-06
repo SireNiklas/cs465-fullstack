@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "test": "node --test app_api/repositories/TripRepository.test.js test/security.test.js",
+    "test": "node --test app_api/repositories/TripRepository.test.js test/ranking.test.js test/security.test.js",
     "test:ranking": "node --test test/ranking.test.js",
     "bench": "node tools/benchmark.js",
     "test:security": "node --test test/security.test.js",

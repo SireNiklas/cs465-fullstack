@@ -1,6 +1,6 @@
 const index = (req, res) => {
   res.render('index', {
-    title: 'Travlr Getaways',
+    title: 'GameBrowse',
     nav: { home: true }
   });
 };

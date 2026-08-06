@@ -1,4 +1,4 @@
-# Travlr Getaways
+# GameBrowse
 
 Full stack travel booking application built on the MEAN stack. The project serves a customer-facing site for browsing trips and an administrative single-page application for managing trip data behind secure authentication.
 

@@ -13,5 +13,5 @@ export class AppComponent {
   public auth = inject(AuthenticationService);
   public onLogout(): void { this.auth.logout(); }
 
-  title = 'Travlr Getaways Admin';
+  title = 'GameBrowse Admin';
 }
