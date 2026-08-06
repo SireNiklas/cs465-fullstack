@@ -1,42 +1,42 @@
 [
   {
-    "code": "GALR210214",
-    "name": "Reef & Beef",
-    "length": "4 nights / 5 days",
+    "code": "SURV210214",
+    "name": "Bastion Survival",
+    "length": "Survival, v1.21",
     "start": "2026-02-14T00:00:00Z",
-    "resort": "Emerald Bay Resort, 3 stars",
-    "perPerson": "799.00",
+    "resort": "US-East, Dallas",
+    "perPerson": "64",
     "image": "reef1.jpg",
-    "description": "Snorkel coral reefs by day and feast on fresh seafood by night."
+    "description": "Long running survival world with land claims, a player market, and no resets. Whitelist is open."
   },
   {
-    "code": "TROP250214",
-    "name": "Tropical Adventure",
-    "length": "7 nights / 8 days",
+    "code": "MODP250214",
+    "name": "Ironworks Modded",
+    "length": "Modded, 180 mods",
     "start": "2026-05-21T00:00:00Z",
-    "resort": "Coral Sands, 4 stars",
-    "perPerson": "1199.00",
+    "resort": "EU-West, Frankfurt",
+    "perPerson": "40",
     "image": "tropical1.jpg",
-    "description": "Zip-line through rainforest canopy and unwind on white-sand beaches."
+    "description": "Heavy tech and automation pack. Chunk loaders allowed, quest book included, modpack auto installs on join."
   },
   {
-    "code": "MTNX180314",
-    "name": "Mountain Expedition",
-    "length": "5 nights / 6 days",
+    "code": "PVPX180314",
+    "name": "Coldfront PvP",
+    "length": "PvP, seasonal",
     "start": "2026-07-10T00:00:00Z",
-    "resort": "Alpine Ridge Lodge, 4 stars",
-    "perPerson": "1499.00",
+    "resort": "US-West, Portland",
+    "perPerson": "120",
     "image": "mountain1.jpg",
-    "description": "Guided summit hikes, alpine lakes, and lodge dining at altitude."
+    "description": "Six week seasons with full loot drop and a wipe at the end of each one. Teams capped at five."
   },
   {
-    "code": "SAFR120514",
-    "name": "Safari Getaway",
-    "length": "6 nights / 7 days",
+    "code": "CREA120514",
+    "name": "Drafting Table",
+    "length": "Creative, v1.21",
     "start": "2026-09-03T00:00:00Z",
-    "resort": "Savanna Plains Camp, 5 stars",
-    "perPerson": "2299.00",
+    "resort": "EU-North, Stockholm",
+    "perPerson": "32",
     "image": "safari1.jpg",
-    "description": "Dawn game drives, luxury tented camps, and Big Five sightings."
+    "description": "Creative plots for builders. WorldEdit enabled per plot, builds are backed up nightly and never cleared."
   }
 ]
