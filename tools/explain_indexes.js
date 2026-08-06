@@ -37,7 +37,7 @@ const CASES = [
   },
   {
     label: 'equality on code, the unique index',
-    query: { code: 'GALR210214' },
+    query: { code: 'SURV210214' },
     expect: 'code_1',
   },
   {
